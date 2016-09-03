@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "awsome-tank-executor",
+    "name": "awsome-tank",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "txzvf9a5sf",
+    "module": "index"
+  }
+}
