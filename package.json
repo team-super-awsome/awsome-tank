@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava tests/"
   },
   "author": "Team Super Awsome",
   "license": "ISC",
   "dependencies": {
     "claudia-api-builder": "^1.6.0"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0"
   }
 }

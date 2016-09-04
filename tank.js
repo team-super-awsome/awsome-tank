@@ -50,7 +50,7 @@ module.exports = function (map) {
 			if (tank.x === mapWidthMiddle
 			&& tank.y !== mapHeightMiddle
 			&& tank.y !== 0
-			&& tank.y !== map.mapHeight {
+			&& tank.y !== map.mapHeight) {
 				switch (tank.direction) {
 					case 'bottom': case 'top':
 						return forwardOrFire();
@@ -62,7 +62,7 @@ module.exports = function (map) {
 			else if (tank.y === mapHeightMiddle
 			&& tank.x !== mapWidthMiddle
 			&& tank.x !== 0
-			&& tank.x !== map.mapWidth {
+			&& tank.x !== map.mapWidth) {
 				switch (tank.direction) {
 					case 'rigt': case 'left':
 						return forwardOrFire();
@@ -149,7 +149,7 @@ module.exports = function (map) {
 			var tmpCommands;
 
 			while (timedout(start, 500) || commands.length !== 0) {
-				tmpCommands = makeRandomPathTo();
+				tmpCommands = makeRandomPathTo(closestTwoArms);
 				if (tmpCommands.length < commands.length) {
 					commands = tmpCommands;
 				}
@@ -170,13 +170,13 @@ module.exports = function (map) {
 
 			if (tank.x < mapWidthMiddle) { // Tank in the left half of the map
 				// Append left arm
-				for (x = 0; y = mapHeightMiddle; x < mapWidthMiddle; ++x) {
+				for (x = 0, y = mapHeightMiddle; x < mapWidthMiddle; ++x) {
 					closestTwoArms.push({x: x, y: y});
 				}
 			}
 			else if (tank.x > mapWidthMiddle) { // Tank in the right half of the map
 				// Append right arm
-				for (x = mapWidthMiddle; y = mapHeightMiddle; x < map.mapWidth; ++x) {
+				for (x = mapWidthMiddle, y = mapHeightMiddle; x < map.mapWidth; ++x) {
 					closestTwoArms.push({x: x, y: y});
 				}
 			}
@@ -204,12 +204,12 @@ module.exports = function (map) {
 			var y;
 
 			if (tank.x < target.x) { // Tank on the left of the target
-				for (x = 0; y = target.y; x < target.x; ++x) {
+				for (x = 0, y = target.y; x < target.x; ++x) {
 					closestTrajectories.push({x: x, y: y});
 				}
 			}
 			else if (tank.x > target.x) { // Tank on the right of the target
-				for (x = target.x; y = target.y; x < map.mapWidth; ++x) {
+				for (x = target.x, y = target.y; x < map.mapWidth; ++x) {
 					closestTrajectories.push({x: x, y: y});
 				}
 			}
@@ -231,9 +231,11 @@ module.exports = function (map) {
 		makeRandomPathTo = function (points) {
 			var end = pickRandomElement(points);
 			var current = {x: tank.x, y: tank.y, direction: tank.direction};
+			var path = [];
 
 			var advancementAxis;
 			var advancement;
+			var advancementDirection;
 			var turns;
 			var shots;
 
@@ -279,13 +281,13 @@ module.exports = function (map) {
 		},
 		getShots = function (point) {
 			var wall = wallAt(point);
-			var nuberOfShots;
+			var numberOfShots;
 
 			if (wall === undefined) {
 				return [];
 			}
 
-			numberOfShots = Math.ceil(wall.strength / tank.weaponDamage);
+			numberOfShots = Math.ceil(wall.strength / map.weaponDamage);
 			return Array(numberOfShots).fill('fire');
 		},
 		getSurroundingPoints = function (center) {
@@ -325,7 +327,7 @@ module.exports = function (map) {
 				return 'fire';
 			}
 
-			If ((enemyWithRelativePosition = getAlignedEnemy())) {
+			if ((enemyWithRelativePosition = getAlignedEnemy())) {
 				return rotateTowards(enemyWithRelativePosition.relativePosition);
 			}
 
@@ -333,15 +335,15 @@ module.exports = function (map) {
 		},
 		getAlignedEnemy = function () {
 			var bulletTrajectories = [];
-			var limitX = Math.min(map.mapWidt - 1, tank.x + tank.weaponRange);
-			var limitY = Math.min(map.mapHeight - 1, tank.y + tank.weaponRange);
+			var limitX = Math.min(map.mapWidt - 1, tank.x + map.weaponRange);
+			var limitY = Math.min(map.mapHeight - 1, tank.y + map.weaponRange);
 
 			var x;
 			var y;
 			var i;
 			var enemy;
 
-			for (x = Math.max(0, tank.x - tank.weaponRange), y = tank.y; x < tank.x; ++x) {
+			for (x = Math.max(0, tank.x - map.weaponRange), y = tank.y; x < tank.x; ++x) {
 				bulletTrajectories.push({x: x, y: y, relativePosition: 'left'});
 			}
 
@@ -349,7 +351,7 @@ module.exports = function (map) {
 				bulletTrajectories.push({x: x, y: y, relativePosition: 'right'});
 			}
 
-			for (x = tank.x, y = Max(0, tank.y - tank.weaponRange); y < tank.y; ++y) {
+			for (x = tank.x, y = Max(0, tank.y - map.weaponRange); y < tank.y; ++y) {
 				bulletTrajectories.push({x: x, y: y, relativePosition: 'top'});
 			}
 
