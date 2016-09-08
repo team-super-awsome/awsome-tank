@@ -12,6 +12,7 @@
     "claudia-api-builder": "^1.6.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0"
+    "ava": "^0.16.0",
+    "chai": "^3.5.0"
   }
 }
