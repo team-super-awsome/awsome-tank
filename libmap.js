@@ -90,7 +90,7 @@ var libmap = {
     if (from === to) {
       return [];
     }
-    if ((from === 'top' && from === 'bottom')
+    if ((from === 'top' && to === 'bottom')
     || (from === 'bottom' && to === 'top')
     || (from === 'left' && to === 'right')
     || (from === 'right' && to === 'left')) {
@@ -291,7 +291,7 @@ var libmap = {
 
     var tmpCommands;
 
-    while (!timedout(start, 500) || commands.length !== 0) {
+    while (!timedout(start, 500) && commands.length !== 0) {
       tmpCommands = this.makeRandomPathTo(closestTwoArms);
       if (tmpCommands.length < commands.length) {
         commands = tmpCommands;
@@ -305,14 +305,14 @@ var libmap = {
 
     // Returns shortest array of commands necessary to aim on the target
 
-    var closestTrajectories = this.getClosestTwoBulletTrajectories();
+    var closestTrajectories = this.getClosestTwoBulletTrajectories(target);
     var commands = this.makeRandomPathTo(closestTrajectories);
     var start = process.hrtime();
     var timedout = require('./libtimer').timedout;
 
     var tmpCommands;
 
-    while (!timedout(start, 500) || commands.length !== 0) {
+    while (!timedout(start, 500) && commands.length !== 0) {
       tmpCommands = this.makeRandomPathTo(closestTrajectories);
       if (tmpCommands.length < commands.length) {
         commands = tmpCommands;

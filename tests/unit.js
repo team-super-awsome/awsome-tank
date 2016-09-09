@@ -108,6 +108,19 @@ test('makeRandomPathTo will in general make some moves', function (t) {
   t.is(path[path.length - 1], 'forward');
 });
 
+test('makeRandomPathTo may turn tank more than once', function (t) {
+  var libmap = require('../libmap');
+  libmap.setMap({
+    mapWidth: 10,
+    mapHeight: 10,
+    you: {x: 3, y: 4, direction: 'top'},
+    walls: []
+  });
+  t.deepEqual(libmap.makeRandomPathTo([{x: 3, y: 5}]), [
+    'turn-right', 'turn-right', 'forward'
+  ]);
+});
+
 test('getPossibleBulletTrajectories is a cross with the tank in the center', function (t) {
   var libmap = require('../libmap');
   libmap.setMap({
@@ -259,4 +272,30 @@ test.cb('libtimer.timedout is comparable to setTimeout', function (t) {
     t.true(timedout(start, 500));
     t.end();
   }, 500);
+});
+
+test('getShortestWayToCentralCross returns an array of commands', function (t) {
+  var libmap = require('../libmap');
+  libmap.setMap({
+    mapWidth: 10,
+    mapHeight: 10,
+    you: {x: 3, y: 4, direction: 'top'},
+    walls: []
+  });
+  assert.includeMembers([
+    'turn-left', 'turn-right', 'forward', 'fire', 'reverse', 'pass'
+  ], libmap.getShortestWayToCentralCross());
+});
+
+test('getShortestPathToAimAtTarget returns an array of commands', function (t) {
+  var libmap = require('../libmap');
+  libmap.setMap({
+    mapWidth: 10,
+    mapHeight: 10,
+    you: {x: 3, y: 4, direction: 'top'},
+    walls: []
+  });
+  assert.includeMembers([
+    'turn-left', 'turn-right', 'forward', 'fire', 'reverse', 'pass'
+  ], libmap.getShortestPathToAimAtTarget({x: 6, y: 3}));
 });
