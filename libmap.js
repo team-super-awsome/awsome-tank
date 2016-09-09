@@ -60,11 +60,11 @@ var libmap = {
       advancement =  Math.sign(end[advancementAxis] - current[advancementAxis]);
       advancementDirection = this.getAdvancementDirection(advancementAxis, advancement);
       turns = this.getTurns(current.direction, advancementDirection);
-      path.push(...turns);
+      Array.prototype.push.apply(path, turns);
       current[advancementAxis] += advancement;
       current.direction = advancementDirection;
       shots = this.getShots(current);
-      path.push(...shots);
+      Array.prototype.push.apply(path, shots);
       path.push('forward');
     }
 
