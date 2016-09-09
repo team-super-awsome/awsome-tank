@@ -8,7 +8,7 @@ test('an enemy with position is on radar', function (t) {
     you: {x: 1, y: 2},
     enemies: [{x: 44, y: 21}]
   });
-  t.true(libmap.enemyIsOnRadar());
+  t.truthy(libmap.enemyOnRadar());
 });
 
 test('enemy outside of radar zone not on radar', function (t) {
@@ -17,7 +17,7 @@ test('enemy outside of radar zone not on radar', function (t) {
     you: {x:1, y:2},
     enemies: [{strength: 12}]
   });
-  t.false(libmap.enemyIsOnRadar());
+  t.falsy(libmap.enemyOnRadar());
 });
 
 test('pickRandomElement returns any element from the passed-in array', function (t) {

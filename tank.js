@@ -3,6 +3,7 @@ module.exports = function (map) {
 	'use strict';
 
 	var libmap = require('./libmap'),
+		libarray = require('./libarray'),
 		tank = map.you,
 		patrolTheCentralCross = function () {
 
@@ -37,7 +38,7 @@ module.exports = function (map) {
 					case 'rigt': case 'left':
 						return forwardOrFire();
 					default:
-						return 'turh-right'; // Any turn, could prefer going to center instead
+						return 'turn-right'; // Any turn, could prefer going to center instead
 				}
 			}
 
@@ -94,7 +95,7 @@ module.exports = function (map) {
 			}
 
 			else if (tank.x === mapWidthMiddle && tank.y === mapHeightMiddle) {
-				return forwardOrFire();
+				return libarray.pickRandomElement(['turn-left', 'turn-right', forwardOrFire()]);
 			}
 
 			return moveToCentralCross();
@@ -108,25 +109,36 @@ module.exports = function (map) {
 		moveToCentralCross = function () {
 			return libmap.getShortestWayToCentralCross()[0];
 		},
-		killEnemy = function () {
-			var enemyWithRelativePosition;
+		killEnemy = function (enemy) {
+			var path;
+			var turns;
 
-			if (libmap.hasTarget(enemyAt)) {
-				return 'fire';
+			path = libmap.getShortestPathToAimAtTarget(enemy);
+
+			if (path.length !== 0) {
+				return path[0];
 			}
 
-			if ((enemyWithRelativePosition = libmap.hasAlignedEnemy())) {
-				return libmap.changeDirection(enemyWithRelativePosition.relativePosition);
+			turns = libmap.directTo(enemy);
+
+			if (turns.length !== 0) {
+				return turns[0];
 			}
 
-			return libmap.getShortestPathToAimAtTarget()[0];
+			return 'pass';
 		};
+
+	var enemy;
 
 	libmap.setMap(map);
 	console.log(map);
 
-	if (libmap.enemyIsOnRadar()) {
-		return killEnemy();
+	if (libmap.hasTarget(libmap.enemyAt.bind(libmap))) {
+		return 'fire';
+	}
+
+	if ((enemy = libmap.enemyOnRadar())) {
+		return killEnemy(enemy);
 	}
 
 	return patrolTheCentralCross();

@@ -38,8 +38,8 @@ var libmap = {
     return false;
   },
 
-  enemyIsOnRadar: function () {
-    return undefined !== this.map.enemies.find(function (tank) {
+  enemyOnRadar: function () {
+    return this.map.enemies.find(function (tank) {
       return tank.x !== undefined;
     });
   },
@@ -251,7 +251,7 @@ var libmap = {
     }
 
     if (this.tank.y < target.y) { // Tank above the target
-      for (x = taret.x, y = 0; y < target.y; ++y) {
+      for (x = target.x, y = 0; y < target.y; ++y) {
         closestTrajectories.push({x: x, y: y})
       }
     }
@@ -263,6 +263,13 @@ var libmap = {
     }
 
     return closestTrajectories;
+  },
+
+  directTo: function (target) {
+    var advancementAxis = this.pickAdvancementAxis(this.tank, target);
+    var advancement =  Math.sign(target[advancementAxis] - this.tank[advancementAxis]);
+    var advancementDirection = this.getAdvancementDirection(advancementAxis, advancement);
+    return this.getTurns(this.tank.direction, advancementDirection);
   },
 
   changeDirection: function (newDirection) {
@@ -318,7 +325,7 @@ var libmap = {
         commands = tmpCommands;
       }
     }
-
+console.log("commands: ", commands);
     return commands;
   }
 
