@@ -1,0 +1,148 @@
+{
+  "matchId": "deeb84c0-d7cb-4e4d-b316-17d6972c4f89",
+  "mapWidth": 20,
+  "mapHeight": 15,
+  "wallDamage": 30,
+  "tankDamage": 50,
+  "weaponDamage": 60,
+  "visibility": 8,
+  "weaponRange": 5,
+  "you": {
+    "direction": "right",
+    "x": 1,
+    "y": 7,
+    "strength": 300,
+    "ammo": 996,
+    "status": "moving",
+    "targetRange": 1
+  },
+  "enemies": [
+    {
+      "strength": 300
+    }
+  ],
+  "walls": [
+    {
+      "x": 7,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 8,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 4,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 1,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 2,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 0,
+      "y": 9,
+      "strength": 200
+    }
+  ],
+  "suddenDeath": 571,
+  "fire": []
+}

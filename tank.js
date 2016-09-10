@@ -35,7 +35,7 @@ module.exports = function (map) {
 			&& tank.x !== 0
 			&& tank.x !== map.mapWidth) {
 				switch (tank.direction) {
-					case 'rigt': case 'left':
+					case 'right': case 'left':
 						return forwardOrFire();
 					default:
 						return 'turn-right'; // Any turn, could prefer going to center instead
@@ -131,7 +131,6 @@ module.exports = function (map) {
 	var enemy;
 
 	libmap.setMap(map);
-	console.log(map);
 
 	if (libmap.hasTarget(libmap.enemyAt.bind(libmap))) {
 		return 'fire';

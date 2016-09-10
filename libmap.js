@@ -325,7 +325,7 @@ var libmap = {
         commands = tmpCommands;
       }
     }
-console.log("commands: ", commands);
+
     return commands;
   }
 
