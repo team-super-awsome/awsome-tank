@@ -101,9 +101,12 @@ module.exports = function (map) {
 			return moveToCentralCross();
 		},
 		forwardOrFire = function () {
-			if (libmap.wallAt(libmap.nextField())) {
+			var nextField = libmap.nextField();
+
+			if (libmap.wallAt(nextField) || libmap.enemyAt(nextField)) {
 				return 'fire';
 			}
+
 			return 'forward';
 		},
 		moveToCentralCross = function () {
@@ -125,7 +128,7 @@ module.exports = function (map) {
 				return turns[0];
 			}
 
-			return 'fire';
+			return forwardOrFire();
 		};
 
 	var enemy;
