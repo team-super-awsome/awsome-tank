@@ -129,72 +129,6 @@ var libmap = {
 		});
 	},
 
-  getSurroundingPoints: function (center) {
-    var surroundingPoints = [];
-
-    if (center.x - 1 >= 0) {
-      surroundingPoints.push({x: center.x - 1, y: center.y});
-    }
-
-    if (center.x + 1 < this.map.mapWidth) {
-      surroundingPoints.push({x: center.x + 1, y: center.y});
-    }
-
-    if (center.y - 1 >= 0) {
-      surroundingPoints.push({x: center.x, y: center.y - 1});
-    }
-
-    if (center.y + 1 < this.map.mapHeight) {
-      surroundingPoints.push({x: center.x, y: center.y + 1});
-    }
-
-    return surroundingPoints;
-  },
-
-  getPossibleBulletTrajectories: function () {
-    var bulletTrajectories = [];
-    var limitX = Math.min(this.map.mapWidth - 1, this.tank.x + this.map.weaponRange);
-    var limitY = Math.min(this.map.mapHeight - 1, this.tank.y + this.map.weaponRange);
-
-    var x;
-    var y;
-
-    for (x = Math.max(0, this.tank.x - this.map.weaponRange), y = this.tank.y; x < this.tank.x; ++x) {
-      bulletTrajectories.push({x: x, y: y, relativePosition: 'left'});
-    }
-
-    for (x = Math.min(this.map.mapWidth - 1, this.tank.x + 1), y = this.tank.y; x <= limitX; ++x) {
-      bulletTrajectories.push({x: x, y: y, relativePosition: 'right'});
-    }
-
-    for (x = this.tank.x, y = Math.max(0, this.tank.y - this.map.weaponRange); y < this.tank.y; ++y) {
-      bulletTrajectories.push({x: x, y: y, relativePosition: 'top'});
-    }
-
-    for (x = this.tank.x, y = Math.min(this.map.mapHeight - 1, this.tank.y + 1); y <= limitY; ++y) {
-      bulletTrajectories.push({x: x, y: y, relativePosition: 'bottom'});
-    }
-
-    return bulletTrajectories;
-  },
-
-  hasAlignedEnemy: function () {
-    var bulletTrajectories = this.getPossibleBulletTrajectories();
-
-    var enemy;
-    var i;
-
-    for (i = 0; i < bulletTrajectories.length; ++i) {
-      enemy = this.enemyAt(bulletTrajectories[i]);
-      if (enemy) {
-        enemy.relativePosition = bulletTrajectories[i].relativePosition;
-        return enemy;
-      }
-    }
-
-    return undefined;
-  },
-
   getClosestTwoArmsOfCentralCross: function () {
     var mapHeightMiddle = parseInt(this.map.mapHeight / 2);
     var mapWidthMiddle = parseInt(this.map.mapWidth / 2);
@@ -272,24 +206,10 @@ var libmap = {
     return this.getTurns(this.tank.direction, advancementDirection);
   },
 
-  changeDirection: function (newDirection) {
-    if (this.tank.direction === newDirection) {
-      return 'pass';
-    }
-
-    if ((this.tank.direction === 'bottom' && newDirection === 'right')
-    || (this.tank.direction === 'right' && newDirection === 'top')
-    || (this.tank.direction === 'top' && newDirection === 'left')
-    || (this.tank.direction === 'left' && newDirection === 'bottom')) {
-      return 'turn-left';
-    }
-
-    return 'turn-right';
-  },
-
   getShortestWayToCentralCross: function () {
 
     // Returns shortest array of commands neccessary to reach the "central cross"
+    // A simulated annealing heuristic
 
     var closestTwoArms = this.getClosestTwoArmsOfCentralCross();
     var commands = this.makeRandomPathTo(closestTwoArms);
@@ -311,6 +231,7 @@ var libmap = {
   getShortestPathToAimAtTarget: function (target) {
 
     // Returns shortest array of commands necessary to aim on the target
+    // A simulated annealing heuristic
 
     var closestTrajectories = this.getClosestTwoBulletTrajectories(target);
     var commands = this.makeRandomPathTo(closestTrajectories);
