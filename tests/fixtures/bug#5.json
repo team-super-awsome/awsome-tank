@@ -1,0 +1,93 @@
+{
+  "matchId": "f5912d38-2374-4af0-87f9-9e6e04f96b90",
+  "mapWidth": 20,
+  "mapHeight": 15,
+  "wallDamage": 30,
+  "tankDamage": 50,
+  "weaponDamage": 60,
+  "visibility": 8,
+  "weaponRange": 5,
+  "you": {
+    "direction": "bottom",
+    "x": 10,
+    "y": 14,
+    "strength": 240,
+    "ammo": 976,
+    "status": "bump-bottom",
+    "targetRange": 1
+  },
+  "enemies": [
+    {
+      "strength": 300
+    }
+  ],
+  "walls": [
+    {
+      "x": 6,
+      "y": 8,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 11,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 14,
+      "strength": 200
+    },
+    {
+      "x": 6,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 3,
+      "y": 14,
+      "strength": 200
+    },
+    {
+      "x": 3,
+      "y": 13,
+      "strength": 200
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "strength": 200
+    },
+    {
+      "x": 16,
+      "y": 14,
+      "strength": 200
+    },
+    {
+      "x": 16,
+      "y": 10,
+      "strength": 200
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 11,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "strength": 200
+    }
+  ],
+  "suddenDeath": 554,
+  "fire": []
+}

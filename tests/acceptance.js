@@ -50,3 +50,8 @@ test('bug #4, consider weapon range before firing', function (t) {
   var map = require('./fixtures/bug#4');
   t.not(tankAI(map), 'fire');
 });
+
+test('bug #5, do not hit that map boundary', function (t) {
+  var map = require('./fixtures/bug#5');
+  t.not(tankAI(map), 'forward');
+});

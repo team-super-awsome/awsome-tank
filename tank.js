@@ -21,7 +21,7 @@ module.exports = function (map) {
 			if (tank.x === mapWidthMiddle
 			&& tank.y !== mapHeightMiddle
 			&& tank.y !== 0
-			&& tank.y !== map.mapHeight) {
+			&& tank.y !== map.mapHeight - 1) {
 				switch (tank.direction) {
 					case 'bottom': case 'top':
 						return forwardOrFire();
@@ -33,7 +33,7 @@ module.exports = function (map) {
 			else if (tank.y === mapHeightMiddle
 			&& tank.x !== mapWidthMiddle
 			&& tank.x !== 0
-			&& tank.x !== map.mapWidth) {
+			&& tank.x !== map.mapWidth - 1) {
 				switch (tank.direction) {
 					case 'right': case 'left':
 						return forwardOrFire();
@@ -55,7 +55,7 @@ module.exports = function (map) {
 				}
 			}
 
-			else if (tank.x === mapWidthMiddle && tank.y === map.mapHeight) {
+			else if (tank.x === mapWidthMiddle && tank.y === map.mapHeight - 1) {
 				switch (tank.direction) {
 					case 'top':
 						return forwardOrFire();
@@ -81,7 +81,7 @@ module.exports = function (map) {
 				}
 			}
 
-			else if (tank.x === map.mapWidth && tank.y === mapHeightMiddle) {
+			else if (tank.x === map.mapWidth - 1 && tank.y === mapHeightMiddle) {
 				switch (tank.direction) {
 					case 'top':
 						return 'turn-left'; // Any turn, but this makes the tank spin less and turn inward more
