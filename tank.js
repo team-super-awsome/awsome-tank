@@ -125,7 +125,7 @@ module.exports = function (map) {
 				return turns[0];
 			}
 
-			return 'pass';
+			return 'fire';
 		};
 
 	var enemy;

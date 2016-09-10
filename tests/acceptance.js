@@ -34,8 +34,14 @@ test('will search its way to central cross', function (t) {
   ], tankAI(map));
 });
 
-test('bug #1', function (t) {
+test('bug #1, send command', function (t) {
   var map = require('./fixtures/bug#1');
   var tankAI = require('../tank');
   assert.isString(tankAI(map));
+});
+
+test('bug #2, no need to pass', function (t) {
+  var map = require('./fixtures/bug#2');
+  var tankAI = require('../tank');
+  t.not(tankAI(map), 'pass');
 });
